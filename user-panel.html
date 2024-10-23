@@ -21,39 +21,171 @@
             text-align: center;
         }
         
-        .content {
+        main {
             padding: 20px;
+            text-align: center;
         }
         
-        .panel {
-            background-color: #fff;
-            padding: 20px;
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: black;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 5px;
+            text-align: left;
+        }
+        
+        .container h2 {
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Panel Użytkownika - Sekcja Zarządzania</h1>
+        <h1>Panel Użytkownika</h1>
     </header>
-    <div class="content">
-        <div class="panel">
-            <h2>Witaj w panelu użytkownika</h2>
-            <p>Zarządzaj swoimi stronami i planami hostingowymi.</p>
+    <main>
+        <div id="noServerContainer" class="container">
+            <h2>Ups nie masz żadnych serwerów lub zostały one zbanowane</h2>
+            <button id="createServerBtn">Stwórz serwer</button>
         </div>
-    </div>
+        <div id="createServerContainer" class="container hidden">
+            <h2>Stwórz serwer</h2>
+            <form id="createServerForm">
+                <label for="serverName">Tytuł serwera:</label>
+                <input type="text" id="serverName" name="serverName" required><br><br>
+                <label for="serverLanguage">Język serwera/Serwer stremowy:</label>
+                <select id="serverLanguage" name="serverLanguage" required>
+<option value="js">JavaScript</option>
+<option value="python">Python</option>
+<option value="streaming">Serwer streamingowy</option>
+<option value="hosting">Serwer hostingowy</option>
+</select><br><br>
+                <label for="serverRam">RAM serwera:</label>
+                <select id="serverRam" name="serverRam" required>
+<option value="256">256 MB</option>
+<option value="512" class="hosting-only">512 MB</option>
+</select><br><br>
+                <label for="serverCpu">CPU serwera:</label>
+                <select id="serverCpu" name="serverCpu" required>
+<option value="intel">Intel</option>
+<option value="amd">AMD</option>
+</select><br><br>
+                <div id="osSelection" class="hidden">
+                    <label for="serverOs">System operacyjny:</label>
+                    <select id="serverOs" name="serverOs">
+<option value="ubuntu">Ubuntu (Do mniejszej wydajności)</option>
+<option value="windows">Windows (Do większej wydajności)</option>
+</select><br><br>
+                </div>
+                <p>Co 14 dni musisz wejść na stronę, jeżeli nie będzie cię 18 dni serwer zostanie usunięty. Jeżeli nie będzie cię 15-17 dni serwer zostanie wyłączony z użycia i nie będziesz mógł go włączyć bez przejścia weryfikacji.</p>
+                <br>
+                <button type="submit">Stwórz serwer</button>
+            </form>
+        </div>
+        <div class="container">
+            <h2>Konsola Logów</h2>
+            <pre id="logEntries">Brak logów...</pre>
+            <button onclick="clearLogs()">Wyczyść logi</button>
+        </div>
+    </main>
     <script>
-        // sprawdzenie czy użytkownik jest zalogowany
-        if (sessionStorage.getItem('userLoggedIn') !== 'true') {
-            alert('Nie jesteś zalogowany! Przekierowanie do strony logowania.');
-            window.location.href = 'user-login.html';
-        } else {
-            // wyczyść flagę zalogowania po załadowaniu panelu
-            sessionStorage.removeItem('userLoggedIn');
+        window.onload = function() {
+            const createServerBtn = document.getElementById('createServerBtn');
+            const createServerContainer = document.getElementById('createServerContainer');
+            const noServerContainer = document.getElementById('noServerContainer');
+            const createServerForm = document.getElementById('createServerForm');
+            const serverTypeSelect = document.getElementById('serverLanguage');
+            const ramSelect = document.getElementById('serverRam');
+            const osSelection = document.getElementById('osSelection');
+
+            // Ukrywanie opcji 512 MB RAM dla serwerów streamingowych
+            function toggleRamOptions() {
+                const isHosting = serverTypeSelect.value === 'hosting';
+                const ramOptions = ramSelect.querySelectorAll('.hosting-only');
+                ramOptions.forEach(option => {
+                    option.style.display = isHosting ? 'block' : 'none';
+                });
+                if (!isHosting && ramSelect.value === '512') {
+                    ramSelect.value = '256'; // resetowanie wyboru RAM, jeśli zmieniono na streaming
+                }
+                osSelection.classList.toggle('hidden', serverTypeSelect.value !== 'streaming');
+            }
+            serverTypeSelect.onchange = toggleRamOptions;
+            // Inicjalne ustawienie
+            toggleRamOptions();
+            createServerBtn.onclick = function() {
+                noServerContainer.classList.add('hidden');
+                createServerContainer.classList.remove('hidden');
+            };
+            createServerForm.onsubmit = function(event) {
+                event.preventDefault();
+                const serverName = document.getElementById('serverName').value;
+                const serverLanguage = document.getElementById('serverLanguage').value;
+                const serverRam = document.getElementById('serverRam').value;
+                const serverCpu = document.getElementById('serverCpu').value;
+                let serverOs = '';
+                if (serverLanguage === 'streaming') {
+                    serverOs = document.getElementById('serverOs').value;
+                }
+                const currentServers = JSON.parse(localStorage.getItem('servers') || '[]');
+                // Sprawdzenie limitu serwerów
+                if (currentServers.length >= 5) {
+                    alert('Maksymalnie 5 serwerów na konto.');
+                    return;
+                }
+                // Sprawdzenie czasu od ostatniego utworzenia serwera
+                const lastCreated = currentServers.length ? currentServers[currentServers.length - 1].created : 0;
+                const now = Date.now();
+                if (now - lastCreated < 48 * 60 * 60 * 1000) {
+                    alert('Można stworzyć nowy serwer po upływie 48 godzin od ostatniego.');
+                    return;
+                }
+                currentServers.push({
+                    name: serverName,
+                    language: serverLanguage,
+                    ram: serverRam,
+                    cpu: serverCpu,
+                    os: serverOs,
+                    created: now
+                });
+                localStorage.setItem('servers', JSON.stringify(currentServers));
+                alert('Serwer został utworzony!');
+                location.reload();
+            };
+        };
+        // Funkcje logów
+        function loadLogs() {
+            const logs = JSON.parse(localStorage.getItem('logs') || '[]');
+            const logEntries = document.getElementById('logEntries');
+            logEntries.textContent = logs.join('') || 'Brak logów...';
         }
+
+        function clearLogs() {
+            localStorage.removeItem('logs');
+            loadLogs();
+        }
+        loadLogs();
     </script>
 </body>
 

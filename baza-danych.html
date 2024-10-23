@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baza Danych Użytkowników</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a40;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: #444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table,
+        th,
+        td {
+            border: 1px solid #555;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Baza Danych Użytkowników</h1>
+    </header>
+    <main>
+        <div class="container" id="freeUsersContainer">
+            <h2>Użytkownicy Darmowi</h2>
+            <table id="freeUsersTable">
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Login</th>
+                    <th>Hasło</th>
+                    <th>Email</th>
+                    <th>Data Rejestracji</th>
+                </tr>
+                <!-- Tu będą wiersze darmowych użytkowników generowane dynamicznie -->
+            </table>
+        </div>
+        <div class="container" id="premiumUsersContainer">
+            <h2>Użytkownicy Premium</h2>
+            <table id="premiumUsersTable">
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Login</th>
+                    <th>Hasło</th>
+                    <th>Email</th>
+                    <th>Data Rejestracji</th>
+                    <th>Data Wygaśnięcia Subskrypcji</th>
+                </tr>
+                <!-- Tu będą wiersze użytkowników premium generowane dynamicznie -->
+            </table>
+        </div>
+        <div class="container" id="adminsContainer">
+            <h2>Administratorzy</h2>
+            <table id="adminsTable">
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Login</th>
+                    <th>Hasło</th>
+                    <th>Email</th>
+                    <th>Data Dołączenia</th>
+                </tr>
+                <tr>
+                    <td>DeszczAdmin</td>
+                    <td>DeszczAdmin</td>
+                    <td>MulciaX1815a</td>
+                    <td>admin@example.com</td>
+                    <td>2023-10-10</td>
+                </tr>
+                <!-- Tu będą wiersze administratorów generowane dynamicznie -->
+            </table>
+        </div>
+        <div class="container" id="ownersContainer">
+            <h2>Właściciele</h2>
+            <table id="ownersTable">
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Login</th>
+                    <th>Hasło</th>
+                    <th>Email</th>
+                    <th>Data Dołączenia</th>
+                </tr>
+                <!-- Tu będą wiersze właścicieli generowane dynamicznie -->
+            </table>
+        </div>
+    </main>
+    <script>
+        const freeUsers = [];
+        const premiumUsers = [];
+        const adminUsers = [{
+            username: 'DeszczAdmin',
+            login: 'DeszczAdmin',
+            password: 'MulciaX1815a',
+            email: 'admin@example.com',
+            joinDate: '2023-10-10'
+        }];
+        const ownerUsers = [];
+
+        function loadTableData(data, tableId) {
+            const table = document.getElementById(tableId);
+            data.forEach(item => {
+                const row = table.insertRow();
+                Object.values(item).forEach(text => {
+                    const cell = row.insertCell();
+                    cell.textContent = text;
+                });
+            });
+        }
+        window.onload = function() {
+            loadTableData(freeUsers, 'freeUsersTable');
+            loadTableData(premiumUsers, 'premiumUsersTable');
+            loadTableData(adminUsers, 'adminsTable');
+            loadTableData(ownerUsers, 'ownersTable');
+        };
+    </script>
+</body>
+
+</html>

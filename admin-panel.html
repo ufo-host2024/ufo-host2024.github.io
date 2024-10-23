@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a40;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: #444;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table,
+        th,
+        td {
+            border: 1px solid #555;
+        }
+        
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Panel Admina</h1>
+    </header>
+    <main>
+        <div class="container" id="usersContainer">
+            <h2>Użytkownicy</h2>
+            <table id="usersTable">
+                <tr>
+                    <th>Nazwa użytkownika</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Akcje</th>
+                </tr>
+                <tr>
+                    <td>admin1</td>
+                    <td>admin1@example.com</td>
+                    <td>Aktywny</td>
+                    <td><button>Edytuj</button> <button>Usuń</button></td>
+                </tr>
+                <!-- Dodaj więcej wierszy według potrzeb -->
+            </table>
+        </div>
+        <div class="container" id="serversContainer">
+            <h2>Serwery</h2>
+            <table id="serversTable">
+                <tr>
+                    <th>Nazwa serwera</th>
+                    <th>Typ</th>
+                    <th>RAM</th>
+                    <th>CPU</th>
+                    <th>OS</th>
+                    <th>Akcje</th>
+                </tr>
+                <tr>
+                    <td>serwer1</td>
+                    <td>hosting</td>
+                    <td>1024 MB</td>
+                    <td>Intel</td>
+                    <td>Ubuntu</td>
+                    <td><button>Edytuj</button> <button>Usuń</button></td>
+                </tr>
+                <!-- Dodaj więcej wierszy według potrzeb -->
+            </table>
+        </div>
+        <div class="container" id="workplacesContainer">
+            <h2>Zakłady pracy</h2>
+            <table id="workplacesTable">
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Lokalizacja</th>
+                    <th>Liczba pracowników</th>
+                    <th>Akcje</th>
+                </tr>
+                <tr>
+                    <td>zakład1</td>
+                    <td>Warszawa</td>
+                    <td>50</td>
+                    <td><button>Edytuj</button> <button>Usuń</button></td>
+                </tr>
+                <!-- Dodaj więcej wierszy według potrzeb -->
+            </table>
+        </div>
+        <div class="container" id="paymentPlansContainer">
+            <h2>Plany Płatności</h2>
+            <table id="paymentPlansTable">
+                <tr>
+                    <th>Plan</th>
+                    <th>RAM</th>
+                    <th>CPU</th>
+                    <th>Storage</th>
+                    <th>Cena</th>
+                </tr>
+                <tr>
+                    <td>Podstawa</td>
+                    <td>1024 MB</td>
+                    <td>50%</td>
+                    <td>3072 MB</td>
+                    <td>8 zł / 2 tygodnie</td>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>2048 MB</td>
+                    <td>100%</td>
+                    <td>4096 MB</td>
+                    <td>12 zł / tydzień</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>6144 MB</td>
+                    <td>200%</td>
+                    <td>6124 MB</td>
+                    <td>40 zł / tydzień</td>
+                </tr>
+                <!-- Dodaj więcej wierszy według potrzeb -->
+            </table>
+        </div>
+        <div class="container">
+            <h2>Dostępne Strony</h2>
+            <a href="serwery-premium.html">Serwery Premium</a><br>
+            <a href="pliki.html">Pliki</a><br>
+            <a href="panel-administracyjny.html">Panel Administracyjny</a><br>
+            <a href="administracja-login.html">Administracja Login</a><br>
+        </div>
+    </main>
+    <!-- Skrypt do ładowania danych dynamicznie, jeśli jest wymagane -->
+    <script>
+        const users = [{
+            username: 'admin1',
+            email: 'admin1@example.com',
+            status: 'Aktywny'
+        }];
+        const servers = [{
+            name: 'serwer1',
+            type: 'hosting',
+            ram: '1024 MB',
+            cpu: 'Intel',
+            os: 'Ubuntu'
+        }];
+        []
+        const workplaces = [{
+            name: 'zakład1',
+            location: 'Warszawa',
+            employees: 50
+        }];
+        const paymentPlans = [{
+            plan: 'Podstawa',
+            ram: '1024 MB',
+            cpu: '50%',
+            storage: '3072 MB',
+            price: '8 zł / 2 tygodnie'
+        }, {
+            plan: 'Standard',
+            ram: '2048 MB',
+            cpu: '100%',
+            storage: '4096 MB',
+            price: '12 zł / tydzień'
+        }, {
+            plan: 'Pro',
+            ram: '6144 MB',
+            cpu: '200%',
+            storage: '6124 MB',
+            price: '40 zł / tydzień'
+        }];
+
+        function loadTableData(data, tableId) {
+            const table = document.getElementById(tableId);
+            data.forEach(item => {
+                const row = table.insertRow();
+                Object.values(item).forEach(text => {
+                    const cell = row.insertCell();
+                    cell.textContent = text;
+                });
+            });
+        }
+        window.onload = function() {
+            loadTableData(users, 'usersTable');
+            loadTableData(servers, 'serversTable');
+            loadTableData(workplaces, 'workplacesTable');
+            loadTableData(paymentPlans, 'paymentPlansTable');
+        };
+    </script>
+</body>
+
+</html>

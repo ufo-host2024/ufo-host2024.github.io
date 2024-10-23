@@ -66,19 +66,25 @@
             background-color: #555;
         }
         
-        #console {
-            font-family: 'Courier New', Courier, monospace;
-            color: #00ff00;
+        #console-container {
             background-color: black;
-            padding: 20px;
-            margin: 20px;
             border-radius: 5px;
+            margin: 20px;
+            padding: 20px;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
             overflow: auto;
             height: 200px;
         }
         
+        .console-line {
+            margin: 0;
+            padding: 0;
+        }
+        
         .hidden {
-            display: none;
+            visible: hidden;
         }
     </style>
 </head>
@@ -87,7 +93,24 @@
     <header>
         <h1>Witamy na UFO Host</h1>
     </header>
-    <div id="console">
+
+    <div id="console-container">
+        <pre id="ascii-art-darmowy">
+██╗░░░██╗███████╗░█████╗░  ██╗░░██╗░█████╗░░██████╗████████╗  ████████╗███████╗░█████╗░███╗░░░███╗
+██║░░░██║██╔════╝██╔══██╗  ██║░░██║██╔══██╗██╔════╝╚══██╔══╝  ╚══██╔══╝██╔════╝██╔══██╗████╗░████║
+██║░░░██║█████╗░░██║░░██║  ███████║██║░░██║╚█████╗░░░░██║░░░  ░░░██║░░░█████╗░░███████║██╔████╔██║
+██║░░░██║██╔══╝░░██║░░██║  ██╔══██║██║░░██║░╚═══██╗░░░██║░░░  ░░░██║░░░██╔══╝░░██╔══██║██║╚██╔╝██║
+╚██████╔╝██║░░░░░╚█████╔╝  ██║░░██║╚█████╔╝██████╔╝░░░██║░░░  ░░░██║░░░███████╗██║░░██║██║░╚═╝░██║
+░╚═════╝░╚═╝░░░░░░╚════╝░  ╚═╝░░╚═╝░╚════╝░╚═════╝░░░░╚═╝░░░  ░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝
+</pre>
+        <pre class="console-line">D̳a̳r̳m̳o̳w̳y̳ p̳a̳n̳e̳l̳ h̳o̳s̳t̳i̳n̳g̳o̳wy̳ ł̳a̳d̳o̳wanie s̳e̳r̳w̳e̳r̳a̳ h̳t̳m̳l</pre>
+        <pre class="console-line">
+Ładowanie serwera (Darmowy)...
+Inicjalizacja...
+Sprawdzanie połączeń...
+Uruchamianie modułów...
+Załadowano serwery!
+</pre>
     </div>
     <nav>
         <a href="user-login.html">Panel Użytkownika</a>
@@ -95,37 +118,50 @@
     </nav>
     <main>
         <h2>Zaloguj się, aby kontynuować</h2>
-        <button onclick="window.location.href='user-login.html'">Logowanie Użytkownika</button>
-        <button onclick="window.location.href='admin.html'">Logowanie Admina</button>
+        <button id="userLoginBtn" disabled>Logowanie Użytkownika</button>
+        <button id="adminLoginBtn" disabled>Logowanie Admina</button>
     </main>
     <script>
-        function writeToConsole(message, callback) {
-            const consoleDiv = document.getElementById('console');
-            const p = document.createElement('p');
-            p.textContent = message;
-            consoleDiv.appendChild(p);
-            if (callback) {
-                setTimeout(callback, 1000);
-            }
-        }
-
-        function showContent() {
-            document.querySelector('nav').style.visibility = 'visible';
-            document.querySelector('main').style.visibility = 'visible';
+        function writeToConsole(message, delay, callback) {
+            const consoleContainer = document.getElementById('console-container');
+            setTimeout(function() {
+                const newLine = document.createElement('p');
+                newLine.className = 'console-line';
+                newLine.textContent = message;
+                consoleContainer.appendChild(newLine);
+                consoleContainer.scrollTop = consoleContainer.scrollHeight;
+                if (callback) callback();
+            }, delay);
         }
 
         function loadServer() {
-            writeToConsole('Ładowanie serwera...');
-            writeToConsole('Inicjalizacja...', function() {
-                writeToConsole('Sprawdzanie połączeń...', function() {
-                    writeToConsole('Uruchamianie modułów...');
-                    setTimeout(showContent, 1000);
-                });
-            });
-        }
+            const isPremium = false; // Zmień na true, jeśli to płatny serwer
+            const delay = isPremium ? 2000 : 5000; // 2 sekundy dla płatnych, 5 sekund dla darmowych
+            const messages = isPremium ? ['Ładowanie serwera (Płatny)...', 'Inicjalizacja...', 'Sprawdzanie połączeń...', 'Uruchamianie modułów...', 'Załadowano serwery!'] : ['Ładowanie serwera (Darmowy)...', 'Inicjalizacja...', 'Sprawdzanie połączeń...', 'Uruchamianie modułów...', 'Załadowano serwery!'];
+            let i = 0;
 
-        window.onload = function() {
-            setTimeout(loadServer, 1000);
+            function displayMessage() {
+                if (i < messages.length) {
+                    writeToConsole(messages[i], delay / messages.length, displayMessage);
+                    i++;
+                } else {
+                    document.querySelector('nav').style.visibility = 'visible';
+                    document.querySelector('main').style.visibility = 'visible';
+                    const buttons = document.querySelectorAll('button');
+                    buttons.forEach(button => button.disabled = false);
+                }
+            }
+            displayMessage();
+        }
+        window.onload = loadServer;
+        document.getElementById('adminLoginBtn').onclick = function() {
+            const ownerLogin = prompt('Podaj login właściciela:');
+            const ownerPassword = prompt('Podaj hasło właściciela:');
+            if (ownerLogin === 'owner_login' && ownerPassword === 'owner_password') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('Nieprawidłowy login lub hasło');
+            }
         };
     </script>
 </body>
