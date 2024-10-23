@@ -17,6 +17,7 @@
             background-color: #333;
             padding: 10px;
             border-radius: 5px;
+            text-align: center;
         }
         
         nav a {
@@ -30,13 +31,32 @@
             color: #00ff00;
         }
         
+        main {
+            background-color: #2a2a55;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .section p {
+            font-size: 18px;
+        }
+        
         .advert {
             background-color: #444;
             padding: 15px;
             margin-top: 20px;
             border-radius: 5px;
             text-align: center;
-            font-size: 16px;
         }
         
         .advert a {
@@ -47,23 +67,42 @@
         .advert a:hover {
             color: #ffaa00;
         }
+        
+        .partner-link {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+        
+        .partner-link:hover {
+            color: #ffaa00;
+        }
     </style>
 </head>
 
 <body>
     <nav>
         <a href="index.html">Strona Główna</a>
-        <a href="register.html">Rejestracja</a>
-        <a href="reset.html">Resetowanie Hasła</a>
-        <a href="admin.html">Panel Admina</a>
-        <a href="contacts.html">Kontakt</a>
-        <a href="about.html">O Nas</a>
-        <!-- Dodaj więcej linków, jeśli to konieczne -->
+        <a href="admin.html">Admin</a>
+        <a href="plans_free.html">Darmowe Plany</a>
+        <a href="plans_paid.html">Płatne Plany</a>
+        <a href="live_streaming.html">Live-streaming</a>
     </nav>
 
-    <div class="advert">
-        <p>Hostuj swoje projekty z nami! Najlepsze usługi hostingowe w przystępnych cenach. <a href="https://hoster.example.com">Dowiedz się więcej</a></p>
-    </div>
-</body>
+    <main>
+        <section class="section welcome">
+            <h2>Witamy w Serwisie Hostingowym</h2>
+            <p>Zarządzaj swoimi stronami i planami hostingowymi z łatwością. Oferujemy różne opcje dostosowane do Twoich potrzeb.</p>
+        </section>
 
-</html>
+        <section class="section partners">
+            <h2>Dołącz do Programu Partnerskiego FUNKCJA JESZCZE NIE DZIAŁA! LINK WYGERNERUJEMY NA DISCORDZIE!</h2>
+            <p>Za każdego zarejestrowanego przez Twój link użytkownika, zbierasz punkty. Więcej zarejestrowanych osób to większe szanse na darmowe usługi od właściciela.</p>
+            <p>Twój link partnerski: <span class="partner-link">https://hoster.example.com/partner123</span></p>
+        </section>
+
+        <div class="advert">
+            <h2>Oferta Premium</h2>
+            <p>Uzyskaj dostęp do ekskluzywnych funkcji i lepszej wydajności. <a href="premium.html">Dowiedz się więcej</a></p>
+        </div>
+    </main>
+</body>
