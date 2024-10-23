@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admina</title>
+    <title>Rejestracja</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,6 +23,7 @@
         
         input[type="text"],
         input[type="password"],
+        input[type="email"],
         input[type="number"] {
             width: 100%;
             padding: 10px;
@@ -46,62 +47,31 @@
         input[type="submit"]:hover {
             background-color: #555;
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
     </style>
 </head>
 
 <body>
-    <h1>Panel Admina</h1>
-    <form id="adminForm">
+    <h1>Rejestracja</h1>
+    <form id="registerForm">
         <label for="username">Nazwa użytkownika:</label>
         <input type="text" id="username" name="username" required>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <label for="password">Hasło:</label>
         <input type="password" id="password" name="password" required>
+        <label for="confirmPassword">Potwierdź hasło:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
         <label for="pin">PIN:</label>
-        <input type="number" id="pin" name="pin" required>
-        <input type="submit" value="Dodaj Konto">
+        <input type="number" id="pin" name="pin" required><br>
+        <input type="button" value="Wygeneruj PIN" onclick="generatePin()">
+        <input type="submit" value="Zarejestruj się">
     </form>
-
-    <h2>Lista Użytkowników</h2>
-    <table>
-        <tr>
-            <th>Nazwa użytkownika</th>
-            <th>Email</th>
-            <th>PIN</th>
-            <th>Uprawnienia</th>
-        </tr>
-        <tr>
-            <td>ufo-host-team</td>
-            <td>admin@ufohost.com</td>
-            <td>2024</td>
-            <td>Właściciel (Premium)</td>
-        </tr>
-        <!-- Dodaj nowe wiersze dla innych użytkowników tutaj -->
-    </table>
-
     <script>
-        document.getElementById('adminForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const pin = document.getElementById('pin').value;
-            alert('Konto dla ' + username + ' zostało dodane.');
-        });
+        function generatePin() {
+            const pinField = document.getElementById('pin');
+            const pin = Math.floor(100000 + Math.random() * 900000).toString().slice(0, 6);
+            pinField.value = pin;
+        }
     </script>
 </body>
 

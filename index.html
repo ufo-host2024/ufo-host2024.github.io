@@ -4,165 +4,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona Główna UFO Host</title>
+    <title>Fake Serwer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #1a1a40;
             color: white;
-            overflow: hidden;
-        }
-        
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            padding: 20px;
         }
         
         nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            padding: 15px 0;
-            visibility: hidden;
-            /* Ukrywamy menu nawigacyjne na początku */
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
         }
         
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 18px;
         }
         
         nav a:hover {
-            background-color: #555;
-        }
-        
-        main {
-            padding: 20px;
-            text-align: center;
-            visibility: hidden;
-            /* Ukrywamy główną treść na początku */
-        }
-        
-        button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #555;
-        }
-        
-        #console-container {
-            background-color: black;
-            border-radius: 5px;
-            margin: 20px;
-            padding: 20px;
             color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-            overflow: auto;
-            height: 200px;
         }
         
-        .console-line {
-            margin: 0;
-            padding: 0;
+        .console {
+            background-color: #333;
+            color: #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 500px;
+            height: 250px;
+            overflow-y: auto;
+            margin: 20px 0;
+            visibility: hidden;
+            transition: visibility 0s, opacity 1s linear;
+            opacity: 0;
         }
         
-        .hidden {
-            visible: hidden;
+        .advert {
+            background-color: #444;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .advert a {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+        
+        .advert a:hover {
+            color: #ffaa00;
+        }
+        
+        .add-space {
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Witamy na UFO Host</h1>
-    </header>
-
-    <div id="console-container">
-        <pre id="ascii-art-darmowy">
-██╗░░░██╗███████╗░█████╗░  ██╗░░██╗░█████╗░░██████╗████████╗  ████████╗███████╗░█████╗░███╗░░░███╗
-██║░░░██║██╔════╝██╔══██╗  ██║░░██║██╔══██╗██╔════╝╚══██╔══╝  ╚══██╔══╝██╔════╝██╔══██╗████╗░████║
-██║░░░██║█████╗░░██║░░██║  ███████║██║░░██║╚█████╗░░░░██║░░░  ░░░██║░░░█████╗░░███████║██╔████╔██║
-██║░░░██║██╔══╝░░██║░░██║  ██╔══██║██║░░██║░╚═══██╗░░░██║░░░  ░░░██║░░░██╔══╝░░██╔══██║██║╚██╔╝██║
-╚██████╔╝██║░░░░░╚█████╔╝  ██║░░██║╚█████╔╝██████╔╝░░░██║░░░  ░░░██║░░░███████╗██║░░██║██║░╚═╝░██║
-░╚═════╝░╚═╝░░░░░░╚════╝░  ╚═╝░░╚═╝░╚════╝░╚═════╝░░░░╚═╝░░░  ░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝
-</pre>
-        <pre class="console-line">D̳a̳r̳m̳o̳w̳y̳ p̳a̳n̳e̳l̳ h̳o̳s̳t̳i̳n̳g̳o̳wy̳ ł̳a̳d̳o̳wanie s̳e̳r̳w̳e̳r̳a̳ h̳t̳m̳l</pre>
-        <pre class="console-line">
-Ładowanie serwera (Darmowy)...
-Inicjalizacja...
-Sprawdzanie połączeń...
-Uruchamianie modułów...
-Załadowano serwery!
-</pre>
-    </div>
     <nav>
-        <a href="user-login.html">Panel Użytkownika</a>
+        <a href="index.html">Strona Główna</a>
+        <a href="register.html">Rejestracja</a>
+        <a href="reset.html">Resetowanie Hasła</a>
         <a href="admin.html">Panel Admina</a>
+        <a href="contacts.html">Kontakt</a>
+        <a href="about.html">O Nas</a>
+        <a href="premium.html">Oferta Premium</a>
     </nav>
-    <main>
-        <h2>Zaloguj się, aby kontynuować</h2>
-        <button id="userLoginBtn" disabled>Logowanie Użytkownika</button>
-        <button id="adminLoginBtn" disabled>Logowanie Admina</button>
-    </main>
+
+    <!-- Konsola -->
+    <div class="console" id="console">Konsola startowa...</div>
+    <input type="text" id="commandInput" placeholder="Wpisz komendę">
+    <button onclick="processCommand()">Wyślij</button>
+
+    <!-- Reklama -->
+    <div class="advert">
+        <h2>Hostuj swoje projekty z UFO-Host</h2>
+        <p>Najlepszy hosting w kosmosie! <a href="https://hoster.example.com">Sprawdź naszą ofertę</a></p>
+        <div class="add-space"></div>
+        <h3>Oferta Premium</h3>
+        <p>Uzyskaj dostęp do ekskluzywnych funkcji. <a href="premium.html">Dowiedz się więcej o Premium</a></p>
+    </div>
+
     <script>
-        function writeToConsole(message, delay, callback) {
-            const consoleContainer = document.getElementById('console-container');
-            setTimeout(function() {
-                const newLine = document.createElement('p');
-                newLine.className = 'console-line';
-                newLine.textContent = message;
-                consoleContainer.appendChild(newLine);
-                consoleContainer.scrollTop = consoleContainer.scrollHeight;
-                if (callback) callback();
-            }, delay);
-        }
+        function processCommand() {
+            const commandInput = document.getElementById('commandInput');
+            const command = commandInput.value.trim();
+            const consoleDiv = document.getElementById('console');
 
-        function loadServer() {
-            const isPremium = false; // Zmień na true, jeśli to płatny serwer
-            const delay = isPremium ? 2000 : 5000; // 2 sekundy dla płatnych, 5 sekund dla darmowych
-            const messages = isPremium ? ['Ładowanie serwera (Płatny)...', 'Inicjalizacja...', 'Sprawdzanie połączeń...', 'Uruchamianie modułów...', 'Załadowano serwery!'] : ['Ładowanie serwera (Darmowy)...', 'Inicjalizacja...', 'Sprawdzanie połączeń...', 'Uruchamianie modułów...', 'Załadowano serwery!'];
-            let i = 0;
-
-            function displayMessage() {
-                if (i < messages.length) {
-                    writeToConsole(messages[i], delay / messages.length, displayMessage);
-                    i++;
-                } else {
-                    document.querySelector('nav').style.visibility = 'visible';
-                    document.querySelector('main').style.visibility = 'visible';
-                    const buttons = document.querySelectorAll('button');
-                    buttons.forEach(button => button.disabled = false);
-                }
-            }
-            displayMessage();
-        }
-        window.onload = loadServer;
-        document.getElementById('adminLoginBtn').onclick = function() {
-            const ownerLogin = prompt('Podaj login właściciela:');
-            const ownerPassword = prompt('Podaj hasło właściciela:');
-            if (ownerLogin === 'owner_login' && ownerPassword === 'owner_password') {
-                window.location.href = 'admin.html';
+            if (command.startsWith('/status')) {
+                localStorage.setItem('serverStatus', command.slice(8).trim());
+                consoleDiv.innerHTML += '<p>Status ustawiony: ' + command.slice(8).trim() + '</p>';
             } else {
-                alert('Nieprawidłowy login lub hasło');
+                consoleDiv.innerHTML += '<p>Nieznana komenda</p>';
             }
-        };
+
+            commandInput.value = '';
+        }
+
+        window.addEventListener('load', function() {
+            // Konsola pojawia się tylko raz
+            if (!localStorage.getItem('consoleShown')) {
+                const consoleDiv = document.getElementById('console');
+                consoleDiv.style.visibility = 'visible';
+                consoleDiv.style.opacity = '1'; // Ujawnienie konsoli
+                setTimeout(function() {
+                    consoleDiv.style.visibility = 'hidden';
+                    consoleDiv.style.opacity = '0'; // Ukrycie konsoli
+                    localStorage.setItem('consoleShown', 'true');
+                }, 10000);
+            }
+
+            // Wczytywanie statusu serwera
+            const serverStatus = localStorage.getItem('serverStatus');
+            if (serverStatus) {
+                const consoleDiv = document.getElementById('console');
+                consoleDiv.innerHTML += '<p>Aktualny status: ' + serverStatus + '</p>';
+            }
+        });
     </script>
 </body>
 
