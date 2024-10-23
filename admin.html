@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administracyjny</title>
+    <title>Admin Panel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,41 +54,48 @@
         input[type="submit"]:hover {
             background-color: #555;
         }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Panel Administracyjny</h1>
+        <h1>Admin Panel</h1>
     </header>
     <div class="content">
-        <h2>Proszę wprowadzić login i hasło</h2>
-        <form id="adminForm">
-            <label for="login">Login:</label>
-            <input type="text" id="login" name="login">
-            <label for="password">Hasło:</label>
-            <input type="password" id="password" name="password">
+        <h2>Witaj w panelu administracyjnym</h2>
+        <form id="adminLoginForm">
+            <label for="adminLogin">Login:</label>
+            <input type="text" id="adminLogin" name="adminLogin">
+            <label for="adminPassword">Hasło:</label>
+            <input type="password" id="adminPassword" name="adminPassword">
             <input type="submit" value="Zaloguj się">
         </form>
-        <p id="status"></p>
+        <p id="adminStatus"></p>
     </div>
     <script>
-        document.getElementById('adminForm').addEventListener('submit', function(event) {
+        document.getElementById('adminLoginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const login = document.getElementById('login').value;
-            const password = document.getElementById('password').value;
-            if (login === 'ufohost-owner' && password === 'qwerty1357') {
+            const login = document.getElementById('adminLogin').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (login === 'ufo-host-owner' && password === 'ufohost2024') {
                 alert('Hasło poprawne! Witaj w panelu administracyjnym.');
-                window.location.href = 'admin-panel.html';
+                window.location.href = 'baza-danych-user.html';
             } else {
                 alert('Niepoprawny login lub hasło!');
-            }
-
-            // wyświetl status aktywności użytkownika
-            if (login === 'ufohost-owner') {
-                document.getElementById('status').innerText = 'Użytkownik ufohost-owner jest aktywny';
-            } else {
-                document.getElementById('status').innerText = '';
             }
         });
     </script>

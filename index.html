@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona Hostingowa</title>
+    <title>Strona Główna UFO Host</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #1a1a40;
             color: white;
+            overflow: hidden;
         }
         
         header {
@@ -24,113 +25,109 @@
         nav {
             display: flex;
             justify-content: center;
-            padding: 10px;
             background-color: #444;
+            padding: 15px 0;
+            visibility: hidden;
+            /* Ukrywamy menu nawigacyjne na początku */
         }
         
         nav a {
             color: white;
-            padding: 10px;
+            margin: 0 15px;
             text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
         
         nav a:hover {
-            background-color: #333;
+            background-color: #555;
         }
         
-        .content {
+        main {
             padding: 20px;
-        }
-        
-        .panel {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            color: black;
-        }
-        
-        .advert {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ececec;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            color: black;
-        }
-        
-        .advert p {
-            font-weight: bold;
-        }
-        
-        .affiliate {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #e7f7e7;
-            border: 1px solid #d4e1d4;
-            border-radius: 5px;
-            color: black;
-        }
-        
-        .affiliate a {
-            color: #4caf50;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .affiliate a:hover {
-            text-decoration: underline;
-        }
-        
-        .notice {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffcccc;
-            border: 1px solid #ff9999;
-            border-radius: 5px;
-            color: black;
-            font-weight: bold;
             text-align: center;
+            visibility: hidden;
+            /* Ukrywamy główną treść na początku */
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        #console {
+            font-family: 'Courier New', Courier, monospace;
+            color: #00ff00;
+            background-color: black;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            overflow: auto;
+            height: 200px;
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Hosting Panel</h1>
+        <h1>Witamy na UFO Host</h1>
     </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="admin.html">Admin</a>
-        <a href="user-login.html">Logowanie Użytkownika</a>
-        <a href="darmowe_plany.html">Darmowe Plany</a>
-        <a href="platne_plany.html">Płatne Plany</a>
-        <a href="live_streaming.html">Live-streaming</a>
-    </nav>
-    <div class="content">
-        <h2>Witaj w naszej usłudze hostingowej</h2>
-        <p>Tu masz możliwość zarządzania swoimi stronami i planami hostingowymi.</p>
-        <div class="panel">
-            <h3>Kategorie:</h3>
-            <ul>
-                <li><a href="admin.html" style="color: inherit;">Admin</a></li>
-                <li><a href="user-login.html" style="color: inherit;">Logowanie Użytkownika</a></li>
-                <li><a href="darmowe_plany.html" style="color: inherit;">Darmowe Plany</a></li>
-                <li><a href="platne_plany.html" style="color: inherit;">Płatne Plany</a></li>
-                <li><a href="live_streaming.html" style="color: inherit;">Live-streaming</a></li>
-            </ul>
-        </div>
-        <div class="advert">
-            <p>Zarejestruj się, aby otrzymać specjalne oferty i rabaty!</p>
-        </div>
-        <div class="affiliate">
-            <p>Zarejestruj się do naszego programu partnerskiego!</p>
-            <a href="https://discord.gg/qTKGZ6R8vy" id="affiliateLink">Twój link partnerski wygenerujemy na discord</a>
-        </div>
-        <div class="notice">
-            <p>Informacja: Nasze usługi hostingowe są dostępne 24/7. Skontaktuj się z nami, jeśli masz jakiekolwiek pytania!</p>
-        </div>
+    <div id="console">
     </div>
+    <nav>
+        <a href="user-login.html">Panel Użytkownika</a>
+        <a href="admin.html">Panel Admina</a>
+    </nav>
+    <main>
+        <h2>Zaloguj się, aby kontynuować</h2>
+        <button onclick="window.location.href='user-login.html'">Logowanie Użytkownika</button>
+        <button onclick="window.location.href='admin.html'">Logowanie Admina</button>
+    </main>
+    <script>
+        function writeToConsole(message, callback) {
+            const consoleDiv = document.getElementById('console');
+            const p = document.createElement('p');
+            p.textContent = message;
+            consoleDiv.appendChild(p);
+            if (callback) {
+                setTimeout(callback, 1000);
+            }
+        }
+
+        function showContent() {
+            document.querySelector('nav').style.visibility = 'visible';
+            document.querySelector('main').style.visibility = 'visible';
+        }
+
+        function loadServer() {
+            writeToConsole('Ładowanie serwera...');
+            writeToConsole('Inicjalizacja...', function() {
+                writeToConsole('Sprawdzanie połączeń...', function() {
+                    writeToConsole('Uruchamianie modułów...');
+                    setTimeout(showContent, 1000);
+                });
+            });
+        }
+
+        window.onload = function() {
+            setTimeout(loadServer, 1000);
+        };
+    </script>
 </body>
 
 </html>
