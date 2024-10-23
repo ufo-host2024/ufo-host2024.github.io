@@ -33,6 +33,7 @@
             color: black;
         }
         
+        input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
@@ -61,22 +62,33 @@
         <h1>Panel Administracyjny</h1>
     </header>
     <div class="content">
-        <h2>Proszę wprowadzić hasło</h2>
+        <h2>Proszę wprowadzić login i hasło</h2>
         <form id="adminForm">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login">
             <label for="password">Hasło:</label>
             <input type="password" id="password" name="password">
             <input type="submit" value="Zaloguj się">
         </form>
+        <p id="status"></p>
     </div>
     <script>
         document.getElementById('adminForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            const login = document.getElementById('login').value;
             const password = document.getElementById('password').value;
-            if (password === 'qwerty1357') {
+            if (login === 'ufohost-owner' && password === 'qwerty1357') {
                 alert('Hasło poprawne! Witaj w panelu administracyjnym.');
-                // tutaj możesz dodać redirect do faktycznego panelu admina lub innego działania
+                window.location.href = 'admin-panel.html';
             } else {
-                alert('Niepoprawne hasło!');
+                alert('Niepoprawny login lub hasło!');
+            }
+
+            // wyświetl status aktywności użytkownika
+            if (login === 'ufohost-owner') {
+                document.getElementById('status').innerText = 'Użytkownik ufohost-owner jest aktywny';
+            } else {
+                document.getElementById('status').innerText = '';
             }
         });
     </script>

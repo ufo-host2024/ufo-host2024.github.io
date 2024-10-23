@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie Użytkownika</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a40;
+            color: white;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Logowanie Użytkownika</h1>
+    </header>
+    form { background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); color: black; } input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius:
+    5px; } input[type="submit"] { padding: 10px 20px; background-color: #333; color: white; border: none; cursor: pointer; border-radius: 5px; } input[type="submit"]:hover { background-color: #555; }
+    </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Logowanie Użytkownika</h1>
+        </header>
+        <div class="content">
+            <h2>Proszę wprowadzić login i hasło</h2>
+            <form id="userLoginForm">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login">
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="password">
+                <input type="submit" value="Zaloguj się">
+            </form>
+            <p id="status"></p>
+        </div>
+        <script>
+            document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const login = document.getElementById('login').value;
+                const password = document.getElementById('password').value;
+                if (login === 'ufohost-user' && password === 'userpass123') {
+                    alert('Hasło poprawne! Witaj w panelu użytkownika.');
+                    sessionStorage.setItem('userLoggedIn', 'true'); // zapisanie flagi zalogowania
+                    window.location.href = 'user-panel.html';
+                } else {
+                    alert('Niepoprawny login lub hasło!');
+                }
+
+                // wyświetl status aktywności użytkownika
+                if (login === 'ufohost-user') {
+                    document.getElementById('status').innerText = 'Użytkownik ufohost-user jest aktywny';
+                } else {
+                    document.getElementById('status').innerText = '';
+                }
+            });
+        </script>
+    </body>
+
+</html>
